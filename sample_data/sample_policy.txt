@@ -1,0 +1,16 @@
+Company Remote Work and Security Policy
+
+1. Overview
+All employees working remotely must use company-issued hardware and keep software updated.
+
+2. Network & VPN Security
+Employees are required to connect to the internal corporate VPN whenever accessing internal staging and production databases.
+Public Wi-Fi networks must never be used without an active encrypted VPN tunnel.
+
+3. Data Classification
+Confidential data includes customer PII, API secret keys, and unannounced product roadmaps.
+All confidential files stored on local disks must be encrypted using FileVault or BitLocker with full-disk encryption enabled.
+
+4. Incident Reporting
+Any security incident or suspected compromised credential must be reported within 60 minutes to security@example.com.
+Failure to report suspected breaches may result in disciplinary action.

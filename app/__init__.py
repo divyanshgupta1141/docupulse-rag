@@ -1,0 +1,1 @@
+"""DocuPulse RAG Assistant package."""
