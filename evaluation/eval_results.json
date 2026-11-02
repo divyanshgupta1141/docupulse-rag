@@ -1,0 +1,531 @@
+{
+  "evaluation_timestamp": "2026-11-03T21:21:43Z",
+  "dataset_size": 12,
+  "configurations": {
+    "config_a": {
+      "config_name": "Config A (Granular)",
+      "chunk_size": 256,
+      "chunk_overlap": 32,
+      "total_chunks_indexed": 21,
+      "recall_at_3_pct": 100.0,
+      "recall_at_5_pct": 100.0,
+      "answer_keyword_accuracy_pct": 89.3,
+      "insufficient_evidence_precision_pct": 100.0,
+      "avg_ingest_latency_ms": 3.83,
+      "avg_query_latency_ms": 1.97,
+      "documents": [
+        {
+          "filename": "hr_leave_policy_v1.txt",
+          "chunks": 6,
+          "latency_ms": 5.22
+        },
+        {
+          "filename": "engineering_handbook.pdf",
+          "chunks": 8,
+          "latency_ms": 4.72
+        },
+        {
+          "filename": "clinical_safety_protocol.txt",
+          "chunks": 7,
+          "latency_ms": 1.57
+        }
+      ],
+      "detailed_results": [
+        {
+          "id": "eval_01",
+          "question": "What is the annual leave allowance for full-time employees under the leave policy?",
+          "is_unanswerable": false,
+          "recall_at_3": true,
+          "recall_at_5": true,
+          "expected_keywords": [
+            "15",
+            "annual",
+            "leave",
+            "days"
+          ],
+          "matched_keywords": [
+            "15",
+            "annual",
+            "leave",
+            "days"
+          ],
+          "answer": "All full-time employees accrue a base allowance of 15 annual leave days per calendar year. Employees are entitled to 10 paid sick leave days per year for personal medical illness, injury, or to care for an immediate family member. mpleted at least six months of continuous service are eligible for 12 weeks of fully paid parental leave following the birth or adoption of a child.",
+          "citations": [
+            "hr_leave_policy_v1.txt"
+          ],
+          "latency_ms": 3.89
+        },
+        {
+          "id": "eval_02",
+          "question": "How many unused annual leave days can employees roll over into the next calendar year?",
+          "is_unanswerable": false,
+          "recall_at_3": true,
+          "recall_at_5": true,
+          "expected_keywords": [
+            "5",
+            "rollover",
+            "unused"
+          ],
+          "matched_keywords": [
+            "5",
+            "unused"
+          ],
+          "answer": "Employees may carry over a maximum of 5 unused annual leave days into the subsequent calendar year. Sick leave days do not roll over and reset annually on January 1. All full-time employees accrue a base allowance of 15 annual leave days per calendar year.",
+          "citations": [
+            "hr_leave_policy_v1.txt"
+          ],
+          "latency_ms": 1.84
+        },
+        {
+          "id": "eval_03",
+          "question": "What are the allowed deployment windows for production releases in the engineering handbook?",
+          "is_unanswerable": false,
+          "recall_at_3": true,
+          "recall_at_5": true,
+          "expected_keywords": [
+            "Monday",
+            "Thursday",
+            "10:00",
+            "15:00"
+          ],
+          "matched_keywords": [
+            "Monday",
+            "Thursday",
+            "10:00",
+            "15:00"
+          ],
+          "answer": "Production deployments occur Monday through Thursday between 10:00 UTC and 15:00 UTC. Deployments are strictly prohibited on Fridays, weekends, and designated public holidays. All engineers must use hardware security keys (YubiKey) with WebAuthn for infrastructure access.",
+          "citations": [
+            "engineering_handbook.pdf",
+            "engineering_handbook.pdf"
+          ],
+          "latency_ms": 1.71
+        },
+        {
+          "id": "eval_04",
+          "question": "How fast must the primary on-call engineer acknowledge critical PagerDuty alerts?",
+          "is_unanswerable": false,
+          "recall_at_3": true,
+          "recall_at_5": true,
+          "expected_keywords": [
+            "15",
+            "minutes"
+          ],
+          "matched_keywords": [
+            "15",
+            "minutes"
+          ],
+          "answer": "The primary engineer must acknowledge PagerDuty alerts within 15 minutes for critical alerts. If unacknowledged within 15 minutes, alerts escalate automatically to the secondary on-call engineer. Primary on-call shifts rotate weekly on Tuesdays at 12:00 UTC.",
+          "citations": [
+            "engineering_handbook.pdf"
+          ],
+          "latency_ms": 1.67
+        },
+        {
+          "id": "eval_05",
+          "question": "What is the resolution target time for a Sev 1 critical outage?",
+          "is_unanswerable": false,
+          "recall_at_3": true,
+          "recall_at_5": true,
+          "expected_keywords": [
+            "60",
+            "minutes"
+          ],
+          "matched_keywords": [
+            "60",
+            "minutes"
+          ],
+          "answer": "Sev 1 (Critical Outage): Core customer-facing services down for >5% of users. Resolution target is under 4 hours. Resolution target is under 60 minutes.",
+          "citations": [
+            "engineering_handbook.pdf"
+          ],
+          "latency_ms": 1.69
+        },
+        {
+          "id": "eval_06",
+          "question": "What independent verification is mandated before administering high-risk medications in the clinical protocol?",
+          "is_unanswerable": false,
+          "recall_at_3": true,
+          "recall_at_5": true,
+          "expected_keywords": [
+            "two",
+            "registered",
+            "nurses"
+          ],
+          "matched_keywords": [
+            "two",
+            "registered",
+            "nurses"
+          ],
+          "answer": "All high-risk medications, including intravenous heparin, insulin infusions, and opioids,. nsulin infusions, and opioids, require independent double-check verification by two registered nurses before administration. Under no circumstances may any member of clinical nursing or administrative staff alter, adjust, or administer.",
+          "citations": [
+            "clinical_safety_protocol.txt"
+          ],
+          "latency_ms": 1.89
+        },
+        {
+          "id": "eval_07",
+          "question": "How much paid parental leave does the HR leave policy provide, and what is the internal crisis response extension in the clinical safety protocol?",
+          "is_unanswerable": false,
+          "recall_at_3": true,
+          "recall_at_5": true,
+          "expected_keywords": [
+            "12",
+            "weeks",
+            "4499"
+          ],
+          "matched_keywords": [
+            "12",
+            "weeks",
+            "4499"
+          ],
+          "answer": "mpleted at least six months of continuous service are eligible for 12 weeks of fully paid parental leave following the birth or adoption of a child. - Hospital Crisis Response Team: Extension 4499 (Internal Speed Dial 9). Bereavement leave provides up to 5 consecutive paid days for immediate family members.",
+          "citations": [
+            "hr_leave_policy_v1.txt",
+            "clinical_safety_protocol.txt"
+          ],
+          "latency_ms": 1.88
+        },
+        {
+          "id": "eval_08",
+          "question": "Compare the hardware security requirements for engineering infrastructure access with the sick leave doctor note requirement.",
+          "is_unanswerable": false,
+          "recall_at_3": true,
+          "recall_at_5": true,
+          "expected_keywords": [
+            "YubiKey",
+            "three",
+            "days"
+          ],
+          "matched_keywords": [
+            "YubiKey",
+            "three",
+            "days"
+          ],
+          "answer": "A medical doctor's note is required for any continuous absence exceeding three. All engineers must use hardware security keys (YubiKey) with WebAuthn for infrastructure access. Employees are entitled to 10 paid sick leave days per year for personal medical illness, injury, or to care for an immediate family member.",
+          "citations": [
+            "engineering_handbook.pdf",
+            "hr_leave_policy_v1.txt"
+          ],
+          "latency_ms": 1.89
+        },
+        {
+          "id": "eval_09",
+          "question": "What is the resolution target for it?",
+          "is_unanswerable": false,
+          "recall_at_3": true,
+          "recall_at_5": true,
+          "expected_keywords": [
+            "4",
+            "hours"
+          ],
+          "matched_keywords": [
+            "4",
+            "hours"
+          ],
+          "answer": "Resolution target is under 60 minutes. Resolution target is under 4 hours. Sev 1 (Critical Outage): Core customer-facing services down for >5% of users.",
+          "citations": [
+            "engineering_handbook.pdf"
+          ],
+          "latency_ms": 2.33
+        },
+        {
+          "id": "eval_10",
+          "question": "What is the crisis escalation contact for them?",
+          "is_unanswerable": false,
+          "recall_at_3": true,
+          "recall_at_5": true,
+          "expected_keywords": [
+            "4499",
+            "8812"
+          ],
+          "matched_keywords": [],
+          "answer": "In the event of an acute behavioral health emergency or active suicide risk:.",
+          "citations": [
+            "clinical_safety_protocol.txt"
+          ],
+          "latency_ms": 1.85
+        },
+        {
+          "id": "eval_11",
+          "question": "What is the corporate pet policy for bringing emotional support dogs into the office?",
+          "is_unanswerable": true,
+          "passed_gate": true,
+          "answer": "I do not have enough information in the uploaded documents to answer this question.",
+          "latency_ms": 1.53
+        },
+        {
+          "id": "eval_12",
+          "question": "What is the enterprise pricing tier and per-user discount for Acme CRM software subscriptions?",
+          "is_unanswerable": true,
+          "passed_gate": true,
+          "answer": "I do not have enough information in the uploaded documents to answer this question.",
+          "latency_ms": 1.41
+        }
+      ]
+    },
+    "config_b": {
+      "config_name": "Config B (Contextual)",
+      "chunk_size": 512,
+      "chunk_overlap": 64,
+      "total_chunks_indexed": 11,
+      "recall_at_3_pct": 100.0,
+      "recall_at_5_pct": 100.0,
+      "answer_keyword_accuracy_pct": 92.9,
+      "insufficient_evidence_precision_pct": 100.0,
+      "avg_ingest_latency_ms": 2.99,
+      "avg_query_latency_ms": 1.8,
+      "documents": [
+        {
+          "filename": "hr_leave_policy_v1.txt",
+          "chunks": 3,
+          "latency_ms": 2.52
+        },
+        {
+          "filename": "engineering_handbook.pdf",
+          "chunks": 4,
+          "latency_ms": 5.07
+        },
+        {
+          "filename": "clinical_safety_protocol.txt",
+          "chunks": 4,
+          "latency_ms": 1.38
+        }
+      ],
+      "detailed_results": [
+        {
+          "id": "eval_01",
+          "question": "What is the annual leave allowance for full-time employees under the leave policy?",
+          "is_unanswerable": false,
+          "recall_at_3": true,
+          "recall_at_5": true,
+          "expected_keywords": [
+            "15",
+            "annual",
+            "leave",
+            "days"
+          ],
+          "matched_keywords": [
+            "15",
+            "annual",
+            "leave",
+            "days"
+          ],
+          "answer": "All full-time employees accrue a base allowance of 15 annual leave days per calendar year. Full-time employees who have completed at least six months of continuous service are eligible for 12 weeks of fully paid parental leave following the birth or adoption of a child. Employees are entitled to 10 paid sick leave days per year for personal medical illness, injury, or to care for an immediate family member.",
+          "citations": [
+            "hr_leave_policy_v1.txt"
+          ],
+          "latency_ms": 2.87
+        },
+        {
+          "id": "eval_02",
+          "question": "How many unused annual leave days can employees roll over into the next calendar year?",
+          "is_unanswerable": false,
+          "recall_at_3": true,
+          "recall_at_5": true,
+          "expected_keywords": [
+            "5",
+            "rollover",
+            "unused"
+          ],
+          "matched_keywords": [
+            "5",
+            "unused"
+          ],
+          "answer": "Employees may carry over a maximum of 5 unused annual leave days into the subsequent calendar year. Sick leave days do not roll over and reset annually on January 1. All full-time employees accrue a base allowance of 15 annual leave days per calendar year.",
+          "citations": [
+            "hr_leave_policy_v1.txt"
+          ],
+          "latency_ms": 1.74
+        },
+        {
+          "id": "eval_03",
+          "question": "What are the allowed deployment windows for production releases in the engineering handbook?",
+          "is_unanswerable": false,
+          "recall_at_3": true,
+          "recall_at_5": true,
+          "expected_keywords": [
+            "Monday",
+            "Thursday",
+            "10:00",
+            "15:00"
+          ],
+          "matched_keywords": [
+            "Monday",
+            "Thursday",
+            "10:00",
+            "15:00"
+          ],
+          "answer": "All production releases require passing automated end-to-end tests and approval from two senior engineers. Production deployments occur Monday through Thursday between 10:00 UTC and 15:00 UTC. Deployments are strictly prohibited on Fridays, weekends, and designated public holidays.",
+          "citations": [
+            "engineering_handbook.pdf"
+          ],
+          "latency_ms": 1.47
+        },
+        {
+          "id": "eval_04",
+          "question": "How fast must the primary on-call engineer acknowledge critical PagerDuty alerts?",
+          "is_unanswerable": false,
+          "recall_at_3": true,
+          "recall_at_5": true,
+          "expected_keywords": [
+            "15",
+            "minutes"
+          ],
+          "matched_keywords": [
+            "15",
+            "minutes"
+          ],
+          "answer": "The primary engineer must acknowledge PagerDuty alerts within 15 minutes for critical alerts. If unacknowledged within 15 minutes, alerts escalate automatically to the secondary on-call engineer. Primary on-call shifts rotate weekly on Tuesdays at 12:00 UTC.",
+          "citations": [
+            "engineering_handbook.pdf"
+          ],
+          "latency_ms": 1.42
+        },
+        {
+          "id": "eval_05",
+          "question": "What is the resolution target time for a Sev 1 critical outage?",
+          "is_unanswerable": false,
+          "recall_at_3": true,
+          "recall_at_5": true,
+          "expected_keywords": [
+            "60",
+            "minutes"
+          ],
+          "matched_keywords": [
+            "60",
+            "minutes"
+          ],
+          "answer": "Sev 1 (Critical Outage): Core customer-facing services down for >5% of users. Resolution target is under 60 minutes. Resolution target is under 4 hours.",
+          "citations": [
+            "engineering_handbook.pdf"
+          ],
+          "latency_ms": 1.57
+        },
+        {
+          "id": "eval_06",
+          "question": "What independent verification is mandated before administering high-risk medications in the clinical protocol?",
+          "is_unanswerable": false,
+          "recall_at_3": true,
+          "recall_at_5": true,
+          "expected_keywords": [
+            "two",
+            "registered",
+            "nurses"
+          ],
+          "matched_keywords": [
+            "two",
+            "registered",
+            "nurses"
+          ],
+          "answer": "All high-risk medications, including intravenous heparin, insulin infusions, and opioids, require independent double-check. nsulin infusions, and opioids, require independent double-check verification by two registered nurses before administration. Under no circumstances may any member of clinical nursing or administrative staff alter, adjust, or administer any pharmaceutical dosage without a signed physician prescription or a documented verbal order in an active Code Blue resuscitation.",
+          "citations": [
+            "clinical_safety_protocol.txt"
+          ],
+          "latency_ms": 2.11
+        },
+        {
+          "id": "eval_07",
+          "question": "How much paid parental leave does the HR leave policy provide, and what is the internal crisis response extension in the clinical safety protocol?",
+          "is_unanswerable": false,
+          "recall_at_3": true,
+          "recall_at_5": true,
+          "expected_keywords": [
+            "12",
+            "weeks",
+            "4499"
+          ],
+          "matched_keywords": [
+            "12",
+            "weeks",
+            "4499"
+          ],
+          "answer": "Full-time employees who have completed at least six months of continuous service are eligible for 12 weeks of fully paid parental leave following the birth or adoption of a child. Bereavement leave provides up to 5 consecutive paid days for immediate family members. - Hospital Crisis Response Team: Extension 4499 (Internal Speed Dial 9).",
+          "citations": [
+            "hr_leave_policy_v1.txt",
+            "clinical_safety_protocol.txt"
+          ],
+          "latency_ms": 2.59
+        },
+        {
+          "id": "eval_08",
+          "question": "Compare the hardware security requirements for engineering infrastructure access with the sick leave doctor note requirement.",
+          "is_unanswerable": false,
+          "recall_at_3": true,
+          "recall_at_5": true,
+          "expected_keywords": [
+            "YubiKey",
+            "three",
+            "days"
+          ],
+          "matched_keywords": [
+            "YubiKey",
+            "three",
+            "days"
+          ],
+          "answer": "A medical doctor's note is required for any continuous absence exceeding three consecutive business days. All engineers must use hardware security keys (YubiKey) with WebAuthn for infrastructure access. Employees are entitled to 10 paid sick leave days per year for personal medical illness, injury, or to care for an immediate family member.",
+          "citations": [
+            "engineering_handbook.pdf",
+            "hr_leave_policy_v1.txt"
+          ],
+          "latency_ms": 1.99
+        },
+        {
+          "id": "eval_09",
+          "question": "What is the resolution target for it?",
+          "is_unanswerable": false,
+          "recall_at_3": true,
+          "recall_at_5": true,
+          "expected_keywords": [
+            "4",
+            "hours"
+          ],
+          "matched_keywords": [
+            "4",
+            "hours"
+          ],
+          "answer": "Resolution target is under 60 minutes. Resolution target is under 4 hours. Sev 1 (Critical Outage): Core customer-facing services down for >5% of users.",
+          "citations": [
+            "engineering_handbook.pdf"
+          ],
+          "latency_ms": 1.74
+        },
+        {
+          "id": "eval_10",
+          "question": "What is the crisis escalation contact for them?",
+          "is_unanswerable": false,
+          "recall_at_3": true,
+          "recall_at_5": true,
+          "expected_keywords": [
+            "4499",
+            "8812"
+          ],
+          "matched_keywords": [
+            "4499"
+          ],
+          "answer": "In the event of an acute behavioral health emergency or active suicide risk:. - Hospital Crisis Response Team: Extension 4499 (Internal Speed Dial 9). For suspected biohazard or hazardous chemical exposure, contact the Hospital.",
+          "citations": [
+            "clinical_safety_protocol.txt"
+          ],
+          "latency_ms": 1.68
+        },
+        {
+          "id": "eval_11",
+          "question": "What is the corporate pet policy for bringing emotional support dogs into the office?",
+          "is_unanswerable": true,
+          "passed_gate": true,
+          "answer": "I do not have enough information in the uploaded documents to answer this question.",
+          "latency_ms": 1.26
+        },
+        {
+          "id": "eval_12",
+          "question": "What is the enterprise pricing tier and per-user discount for Acme CRM software subscriptions?",
+          "is_unanswerable": true,
+          "passed_gate": true,
+          "answer": "I do not have enough information in the uploaded documents to answer this question.",
+          "latency_ms": 1.22
+        }
+      ]
+    }
+  }
+}

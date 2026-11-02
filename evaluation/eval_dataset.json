@@ -1,0 +1,118 @@
+[
+  {
+    "id": "eval_01",
+    "category": "single_document_factual",
+    "question": "What is the annual leave allowance for full-time employees under the leave policy?",
+    "expected_answer_keywords": ["15", "annual", "leave", "days"],
+    "relevant_filenames": ["hr_leave_policy_v1.txt"],
+    "is_unanswerable": false
+  },
+  {
+    "id": "eval_02",
+    "category": "single_document_factual",
+    "question": "How many unused annual leave days can employees roll over into the next calendar year?",
+    "expected_answer_keywords": ["5", "rollover", "unused"],
+    "relevant_filenames": ["hr_leave_policy_v1.txt"],
+    "is_unanswerable": false
+  },
+  {
+    "id": "eval_03",
+    "category": "single_document_factual",
+    "question": "What are the allowed deployment windows for production releases in the engineering handbook?",
+    "expected_answer_keywords": ["Monday", "Thursday", "10:00", "15:00"],
+    "relevant_filenames": ["engineering_handbook.pdf"],
+    "is_unanswerable": false
+  },
+  {
+    "id": "eval_04",
+    "category": "single_document_factual",
+    "question": "How fast must the primary on-call engineer acknowledge critical PagerDuty alerts?",
+    "expected_answer_keywords": ["15", "minutes"],
+    "relevant_filenames": ["engineering_handbook.pdf"],
+    "is_unanswerable": false
+  },
+  {
+    "id": "eval_05",
+    "category": "single_document_factual",
+    "question": "What is the resolution target time for a Sev 1 critical outage?",
+    "expected_answer_keywords": ["60", "minutes"],
+    "relevant_filenames": ["engineering_handbook.pdf"],
+    "is_unanswerable": false
+  },
+  {
+    "id": "eval_06",
+    "category": "single_document_factual",
+    "question": "What independent verification is mandated before administering high-risk medications in the clinical protocol?",
+    "expected_answer_keywords": ["two", "registered", "nurses"],
+    "relevant_filenames": ["clinical_safety_protocol.txt"],
+    "is_unanswerable": false
+  },
+  {
+    "id": "eval_07",
+    "category": "multi_document_comparative",
+    "question": "How much paid parental leave does the HR leave policy provide, and what is the internal crisis response extension in the clinical safety protocol?",
+    "expected_answer_keywords": ["12", "weeks", "4499"],
+    "relevant_filenames": ["hr_leave_policy_v1.txt", "clinical_safety_protocol.txt"],
+    "is_unanswerable": false
+  },
+  {
+    "id": "eval_08",
+    "category": "multi_document_comparative",
+    "question": "Compare the hardware security requirements for engineering infrastructure access with the sick leave doctor note requirement.",
+    "expected_answer_keywords": ["YubiKey", "three", "days"],
+    "relevant_filenames": ["engineering_handbook.pdf", "hr_leave_policy_v1.txt"],
+    "is_unanswerable": false
+  },
+  {
+    "id": "eval_09",
+    "category": "pronoun_followup",
+    "question": "What is the resolution target for it?",
+    "previous_messages": [
+      {
+        "role": "user",
+        "content": "What is the definition of a Sev 2 incident in the engineering operations handbook?"
+      },
+      {
+        "role": "assistant",
+        "content": "Sev 2 indicates major degradation with high impact latency or loss of non-essential features."
+      }
+    ],
+    "expected_answer_keywords": ["4", "hours"],
+    "relevant_filenames": ["engineering_handbook.pdf"],
+    "is_unanswerable": false
+  },
+  {
+    "id": "eval_10",
+    "category": "pronoun_followup",
+    "question": "What is the crisis escalation contact for them?",
+    "previous_messages": [
+      {
+        "role": "user",
+        "content": "What happens during acute behavioral health emergencies in the clinical protocol?"
+      },
+      {
+        "role": "assistant",
+        "content": "Staff must contact crisis response services immediately."
+      }
+    ],
+    "expected_answer_keywords": ["4499", "8812"],
+    "relevant_filenames": ["clinical_safety_protocol.txt"],
+    "is_unanswerable": false
+  },
+  {
+    "id": "eval_11",
+    "category": "out_of_domain_unanswerable",
+    "question": "What is the corporate pet policy for bringing emotional support dogs into the office?",
+    "expected_answer_keywords": [],
+    "relevant_filenames": [],
+    "is_unanswerable": true
+  },
+  {
+    "id": "eval_12",
+    "category": "out_of_domain_unanswerable",
+    "question": "What is the enterprise pricing tier and per-user discount for Acme CRM software subscriptions?",
+    "expected_answer_keywords": [],
+    "relevant_filenames": [],
+    "is_unanswerable": true
+  }
+]

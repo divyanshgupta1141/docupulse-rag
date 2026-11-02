@@ -1,0 +1,20 @@
+services:
+  docupulse-rag:
+    build: .
+    container_name: docupulse_assistant
+    ports:
+      - "8000:8000"
+    environment:
+      - PROJECT_NAME=DocuPulse RAG Assistant
+      - SQLITE_DB_PATH=sqlite:///./docupulse.db
+      - QDRANT_MODE=memory
+      - USE_MOCK_AI=true
+      - EMBEDDING_PROVIDER=mock
+      - LLM_PROVIDER=mock
+      - CHUNK_SIZE=512
+      - CHUNK_OVERLAP=64
+      - TOP_K=5
+      - SIMILARITY_THRESHOLD=0.20
+    volumes:
+      - ./data:/app/data
+    restart: unless-stopped

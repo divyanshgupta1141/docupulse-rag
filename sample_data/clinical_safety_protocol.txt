@@ -1,0 +1,15 @@
+Clinical Safety and Patient Escalation Protocol (Doc ID: CSP-2025-A)
+Medical Director Approval: Dr. Evelyn Vance, MD, Chief Medical Officer
+
+1. Medical Triage Boundaries
+Clinical triage assistants and nursing staff are strictly bounded to symptom intake and severity scoring using the Canadian Triage and Acuity Scale (CTAS). Non-physician personnel must never formulate differential diagnoses or suggest prescription pharmaceuticals. Level 1 (Resuscitation) and Level 2 (Emergent) presentations require immediate bedside physician handover within 5 minutes.
+
+2. Zero Unauthorized Dosing Rule
+Under no circumstances may any member of clinical nursing or administrative staff alter, adjust, or administer any pharmaceutical dosage without a signed physician prescription or a documented verbal order in an active Code Blue resuscitation. All high-risk medications, including intravenous heparin, insulin infusions, and opioids, require independent double-check verification by two registered nurses before administration.
+
+3. Crisis Escalation Contacts
+In the event of an acute behavioral health emergency or active suicide risk:
+- Hospital Crisis Response Team: Extension 4499 (Internal Speed Dial 9)
+- On-Call Attending Psychiatrist: Direct Beeper 8812
+- Regional Psychiatric Assessment Hotline: 1-800-273-8255 (Available 24/7)
+For suspected biohazard or hazardous chemical exposure, contact the Hospital Safety Officer immediately via Extension 3311.

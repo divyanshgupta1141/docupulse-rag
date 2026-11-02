@@ -1,0 +1,94 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R 5 0 R 7 0 R 9 0 R] /Count 4 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Contents 4 0 R /Resources << /Font << /F1 11 0 R >> >> >>
+endobj
+4 0 obj
+<< /Length 403 >>
+stream
+BT /F1 12 Tf 50 750 Td 15 TL
+(Engineering Operations Handbook - Page 1) ' 
+(1. Deployment Cadence) ' 
+(Production deployments occur Monday through Thursday between 10:00 UTC and 15:00 UTC.) ' 
+(Deployments are strictly prohibited on Fridays, weekends, and designated public holidays.) ' 
+(All production releases require passing automated end-to-end tests and approval from two senior engineers.) ' 
+ET
+
+endstream
+endobj
+5 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Contents 6 0 R /Resources << /Font << /F1 11 0 R >> >> >>
+endobj
+6 0 obj
+<< /Length 387 >>
+stream
+BT /F1 12 Tf 50 750 Td 15 TL
+(Engineering Operations Handbook - Page 2) ' 
+(2. On-Call Rotation Schedules) ' 
+(Primary on-call shifts rotate weekly on Tuesdays at 12:00 UTC.) ' 
+(The primary engineer must acknowledge PagerDuty alerts within 15 minutes for critical alerts.) ' 
+(If unacknowledged within 15 minutes, alerts escalate automatically to the secondary on-call engineer.) ' 
+ET
+
+endstream
+endobj
+7 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Contents 8 0 R /Resources << /Font << /F1 11 0 R >> >> >>
+endobj
+8 0 obj
+<< /Length 511 >>
+stream
+BT /F1 12 Tf 50 750 Td 15 TL
+(Engineering Operations Handbook - Page 3) ' 
+(3. Incident Severity Definitions) ' 
+(Sev 1 \(Critical Outage\): Core customer-facing services down for >5% of users. Resolution target is under 60 minutes.) ' 
+(Sev 2 \(Major Degradation\): High-impact latency or loss of non-essential features. Resolution target is under 4 hours.) ' 
+(Sev 3 \(Minor Defect\): Workarounds exist. Fix scheduled in next sprint.) ' 
+(Sev 4 \(Cosmetic Issue\): Minor UI glitch with zero data loss.) ' 
+ET
+
+endstream
+endobj
+9 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Contents 10 0 R /Resources << /Font << /F1 11 0 R >> >> >>
+endobj
+10 0 obj
+<< /Length 421 >>
+stream
+BT /F1 12 Tf 50 750 Td 15 TL
+(Engineering Operations Handbook - Page 4) ' 
+(4. Staging and Production Credentials Policy) ' 
+(All engineers must use hardware security keys \(YubiKey\) with WebAuthn for infrastructure access.) ' 
+(Production database access is strictly forbidden from personal local environments.) ' 
+(AWS staging credentials expire after 8 hours and require mandatory multi-factor authentication.) ' 
+ET
+
+endstream
+endobj
+11 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+xref
+0 12
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000133 00000 n 
+0000000260 00000 n 
+0000000714 00000 n 
+0000000841 00000 n 
+0000001279 00000 n 
+0000001406 00000 n 
+0000001968 00000 n 
+0000002096 00000 n 
+0000002569 00000 n 
+trailer
+<< /Size 12 /Root 1 0 R >>
+startxref
+2640
+%%EOF
