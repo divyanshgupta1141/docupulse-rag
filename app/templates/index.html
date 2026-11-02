@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DocuPulse — AI Document Intelligence Assistant</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: { 50: '#eef2ff', 500: '#6366f1', 600: '#4f46e5', 700: '#4338ca' },
+            slate: { 850: '#151f32', 900: '#0f172a', 950: '#080e1a' }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Custom scrollbar */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #0f172a; }
+    ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #475569; }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen font-sans antialiased flex flex-col">
+
+  <!-- Top Navigation Header -->
+  <header class="border-b border-slate-800 bg-slate-900/80 backdrop-blur sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <div class="w-9 h-9 rounded-lg bg-indigo-600 flex items-center justify-center shadow-lg shadow-indigo-500/30">
+          <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+          </svg>
+        </div>
+        <div>
+          <h1 class="text-lg font-bold text-white tracking-tight flex items-center gap-2">
+            DocuPulse
+            <span class="text-xs font-semibold px-2 py-0.5 rounded bg-indigo-500/20 text-indigo-400 border border-indigo-500/30">JARK Stage 2</span>
+          </h1>
+          <p class="text-xs text-slate-400">Source-Grounded RAG & Document Intelligence Assistant</p>
+        </div>
+      </div>
+
+      <div class="flex items-center space-x-3">
+        <div id="healthBadge" class="flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          System Online
+        </div>
+        <a href="/docs" target="_blank" class="text-xs px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition flex items-center gap-1.5">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+          Swagger API
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Layout -->
+  <main class="flex-1 max-w-7xl w-full mx-auto p-4 grid grid-cols-1 lg:grid-cols-12 gap-5">
+
+    <!-- LEFT COLUMN: Document Management (5 cols) -->
+    <section class="lg:col-span-5 flex flex-col gap-4">
+
+      <!-- Upload Card -->
+      <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 shadow-sm">
+        <h2 class="text-sm font-semibold text-slate-200 uppercase tracking-wider mb-3 flex items-center gap-2">
+          <svg class="w-4 h-4 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
+          Upload Document (.pdf, .txt)
+        </h2>
+
+        <div class="flex flex-col gap-2">
+          <div class="flex items-center gap-2">
+            <input type="file" id="fileInput" accept=".pdf,.txt" class="block w-full text-xs text-slate-400 file:mr-3 file:py-2 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-indigo-600 file:text-white hover:file:bg-indigo-500 cursor-pointer bg-slate-950 rounded-lg border border-slate-800 p-1">
+            <button onclick="uploadDocument()" id="uploadBtn" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold rounded-lg shadow transition whitespace-nowrap">
+              Upload
+            </button>
+          </div>
+          <p class="text-[11px] text-slate-400">Max size 10MB. Validates empty files, scanned PDFs, and detects duplicate uploads via SHA-256.</p>
+        </div>
+
+        <div class="mt-4 pt-3 border-t border-slate-800/80">
+          <label class="block text-xs font-medium text-slate-300 mb-1.5">Or Ingest Public Webpage URL:</label>
+          <div class="flex gap-2">
+            <input type="url" id="urlInput" placeholder="https://example.com/policy" class="bg-slate-950 border border-slate-800 text-slate-200 text-xs rounded-lg px-3 py-2 flex-1 focus:outline-none focus:border-indigo-500">
+            <button onclick="ingestUrl()" class="px-3 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold rounded-lg border border-slate-700 transition whitespace-nowrap">
+              Scrape URL
+            </button>
+          </div>
+        </div>
+
+        <div id="uploadFeedback" class="mt-3 text-xs hidden"></div>
+      </div>
+
+      <!-- Documents List Card -->
+      <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 shadow-sm flex-1 flex flex-col">
+        <div class="flex items-center justify-between mb-3">
+          <h2 class="text-sm font-semibold text-slate-200 uppercase tracking-wider flex items-center gap-2">
+            <svg class="w-4 h-4 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+            Indexed Knowledge Base (<span id="docCount">0</span>)
+          </h2>
+          <button onclick="loadDocuments()" class="text-xs text-indigo-400 hover:text-indigo-300 flex items-center gap-1">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+            Refresh
+          </button>
+        </div>
+
+        <!-- Hidden input for file updates -->
+        <input type="file" id="updateFileInput" accept=".pdf,.txt" class="hidden" onchange="performAtomicUpdate(this)">
+
+        <div id="documentsList" class="flex-1 overflow-y-auto space-y-2.5 max-h-[460px] pr-1">
+          <div class="text-xs text-slate-500 text-center py-8">Loading documents...</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RIGHT COLUMN: Interactive Chat & Citations (7 cols) -->
+    <section class="lg:col-span-7 flex flex-col bg-slate-900 border border-slate-800 rounded-xl shadow-sm overflow-hidden h-[740px]">
+
+      <!-- Chat Header -->
+      <div class="border-b border-slate-800 p-3.5 bg-slate-900 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <span class="text-xs font-semibold text-slate-400">Conversation ID:</span>
+          <input type="text" id="conversationId" class="bg-slate-950 border border-slate-800 text-slate-200 text-xs rounded px-2.5 py-1 w-44 font-mono focus:outline-none focus:border-indigo-500">
+          <button onclick="newConversation()" title="Start New Conversation" class="text-xs px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition">
+            New
+          </button>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <label class="text-xs text-slate-400">Top-K:</label>
+          <select id="topKSelect" class="bg-slate-950 border border-slate-800 text-slate-200 text-xs rounded px-2 py-1 focus:outline-none">
+            <option value="3">3</option>
+            <option value="5" selected>5</option>
+            <option value="8">8</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Messages Window -->
+      <div id="chatMessages" class="flex-1 overflow-y-auto p-4 space-y-4 bg-slate-950/60">
+        <!-- Welcome Prompt -->
+        <div class="bg-slate-900/80 border border-slate-800 rounded-xl p-4 text-xs text-slate-300">
+          <div class="font-semibold text-indigo-400 mb-1 flex items-center gap-1.5">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            Grounding & Security Features Active:
+          </div>
+          <ul class="list-disc list-inside space-y-1 text-slate-400 mt-2">
+            <li><strong>Bounded Memory:</strong> Bounded to the latest 10 messages with automatic orphaned turn continuation.</li>
+            <li><strong>Follow-up Query Contextualizer:</strong> Resolves pronouns into standalone retrieval queries.</li>
+            <li><strong>Untrusted Data Fence:</strong> Context fenced inside <code class="text-indigo-300">&lt;untrusted_document_context&gt;</code> to defend against indirect prompt injections.</li>
+            <li><strong>Insufficient Evidence Gate:</strong> Returns clear fallback notice if no chunks meet similarity threshold.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Chat Input Area -->
+      <div class="border-t border-slate-800 p-3 bg-slate-900">
+        <form onsubmit="sendChat(event)" class="flex gap-2">
+          <input type="text" id="chatInput" placeholder="Ask a question grounded in the uploaded documents..." class="flex-1 bg-slate-950 border border-slate-800 text-slate-100 text-xs rounded-xl px-4 py-2.5 focus:outline-none focus:border-indigo-500">
+          <button type="submit" id="sendBtn" class="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold rounded-xl shadow transition flex items-center gap-1.5">
+            <span>Send</span>
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+          </button>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Frontend Logic -->
+  <script>
+    let activeUpdateDocId = null;
+
+    function init() {
+      // Generate or retrieve session ID
+      let convId = localStorage.getItem('docupulse_conv_id');
+      if (!convId) {
+        convId = 'conv_' + Math.random().toString(36).substring(2, 10);
+        localStorage.setItem('docupulse_conv_id', convId);
+      }
+      document.getElementById('conversationId').value = convId;
+
+      loadDocuments();
+      loadChatHistory(convId);
+      checkHealth();
+    }
+
+    function newConversation() {
+      const convId = 'conv_' + Math.random().toString(36).substring(2, 10);
+      localStorage.setItem('docupulse_conv_id', convId);
+      document.getElementById('conversationId').value = convId;
+      document.getElementById('chatMessages').innerHTML = '';
+      loadChatHistory(convId);
+    }
+
+    async function checkHealth() {
+      try {
+        const res = await fetch('/health');
+        const data = await res.json();
+        const badge = document.getElementById('healthBadge');
+        if (data.status === 'healthy') {
+          badge.className = 'flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/30';
+          badge.innerHTML = `<span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Mode: ${data.services.llm_provider}`;
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    async function loadDocuments() {
+      const listEl = document.getElementById('documentsList');
+      try {
+        const res = await fetch('/documents');
+        const data = await res.json();
+        document.getElementById('docCount').innerText = data.total;
+
+        if (data.documents.length === 0) {
+          listEl.innerHTML = '<div class="text-xs text-slate-500 text-center py-8">No documents uploaded yet. Upload a file above.</div>';
+          return;
+        }
+
+        listEl.innerHTML = data.documents.map(doc => `
+          <div class="bg-slate-950 border border-slate-800 rounded-lg p-3 hover:border-slate-700 transition">
+            <div class="flex items-start justify-between gap-2">
+              <div class="flex-1 min-w-0">
+                <div class="flex items-center gap-2">
+                  <h3 class="text-xs font-semibold text-slate-200 truncate" title="${doc.filename}">${doc.filename}</h3>
+                  <span class="text-[10px] px-1.5 py-0.5 rounded font-mono font-bold bg-indigo-500/20 text-indigo-400 border border-indigo-500/30">v${doc.version}</span>
+                  <span class="text-[10px] px-1.5 py-0.5 rounded font-medium ${doc.status === 'indexed' ? 'bg-emerald-500/10 text-emerald-400' : 'bg-amber-500/10 text-amber-400'}">${doc.status}</span>
+                </div>
+                <div class="text-[10px] text-slate-400 mt-1 flex items-center gap-3">
+                  <span>Chunks: ${doc.chunk_count}</span>
+                  <span class="font-mono text-slate-500" title="${doc.content_hash}">Hash: ${doc.content_hash.substring(0, 8)}...</span>
+                </div>
+              </div>
+
+              <div class="flex items-center gap-1">
+                <button onclick="triggerUpdate('${doc.document_id}')" title="Safe Blue-Green Atomic Update (PUT /documents/{id})" class="px-2 py-1 text-[11px] bg-slate-800 hover:bg-slate-700 text-slate-200 rounded border border-slate-700 transition">
+                  Update
+                </button>
+                <button onclick="deleteDoc('${doc.document_id}')" title="Delete document and purge vectors" class="p-1 text-slate-400 hover:text-red-400 transition">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        `).join('');
+      } catch (err) {
+        listEl.innerHTML = `<div class="text-xs text-red-400 py-4">Error loading documents: ${err.message}</div>`;
+      }
+    }
+
+    async function uploadDocument() {
+      const fileInput = document.getElementById('fileInput');
+      if (!fileInput.files || fileInput.files.length === 0) {
+        showFeedback('Please select a .pdf or .txt file first.', 'red');
+        return;
+      }
+      const file = fileInput.files[0];
+      const formData = new FormData();
+      formData.append('file', file);
+
+      const btn = document.getElementById('uploadBtn');
+      btn.disabled = true;
+      btn.innerText = 'Indexing...';
+
+      try {
+        const res = await fetch('/documents', { method: 'POST', body: formData });
+        const data = await res.json();
+        if (!res.ok) {
+          throw new Error(data.detail || 'Upload failed');
+        }
+        showFeedback(`Successfully indexed: ${data.filename} (v${data.version}) with ${data.chunk_count} chunks.`, 'emerald');
+        fileInput.value = '';
+        loadDocuments();
+      } catch (err) {
+        showFeedback(err.message, 'red');
+      } finally {
+        btn.disabled = false;
+        btn.innerText = 'Upload';
+      }
+    }
+
+    async function ingestUrl() {
+      const urlInput = document.getElementById('urlInput');
+      const url = urlInput.value.trim();
+      if (!url) return;
+
+      try {
+        const res = await fetch('/documents/url', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ url })
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.detail || 'URL ingestion failed');
+        showFeedback(`Ingested URL: ${data.filename} (${data.chunk_count} chunks)`, 'emerald');
+        urlInput.value = '';
+        loadDocuments();
+      } catch (err) {
+        showFeedback(err.message, 'red');
+      }
+    }
+
+    function triggerUpdate(docId) {
+      activeUpdateDocId = docId;
+      document.getElementById('updateFileInput').click();
+    }
+
+    async function performAtomicUpdate(input) {
+      if (!input.files || input.files.length === 0 || !activeUpdateDocId) return;
+      const file = input.files[0];
+      const formData = new FormData();
+      formData.append('file', file);
+
+      showFeedback(`Initiating Blue-Green swap for document ${activeUpdateDocId}...`, 'indigo');
+
+      try {
+        const res = await fetch(`/documents/${activeUpdateDocId}`, {
+          method: 'PUT',
+          body: formData
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.detail || 'Atomic update failed');
+        showFeedback(`Atomic update complete: Swapped to v${data.version} (${data.chunk_count} chunks). Older vectors purged.`, 'emerald');
+        loadDocuments();
+      } catch (err) {
+        showFeedback(err.message, 'red');
+      } finally {
+        input.value = '';
+        activeUpdateDocId = null;
+      }
+    }
+
+    async function deleteDoc(docId) {
+      if (!confirm(`Delete document and all associated vectors?`)) return;
+      try {
+        const res = await fetch(`/documents/${docId}`, { method: 'DELETE' });
+        if (!res.ok) throw new Error('Failed to delete document');
+        loadDocuments();
+      } catch (err) {
+        alert(err.message);
+      }
+    }
+
+    function showFeedback(msg, color) {
+      const fb = document.getElementById('uploadFeedback');
+      fb.className = `mt-3 text-xs text-${color}-400 block`;
+      fb.innerText = msg;
+      setTimeout(() => { fb.className = 'mt-3 text-xs hidden'; }, 6000);
+    }
+
+    async function loadChatHistory(convId) {
+      try {
+        const res = await fetch(`/chat/${convId}/history`);
+        if (!res.ok) return;
+        const data = await res.json();
+        for (const msg of data.messages) {
+          appendMessageUI(msg.role, msg.content, msg.citations, false);
+        }
+      } catch (e) {
+        console.error(e);
+      }
+    }
+
+    async function sendChat(e) {
+      e.preventDefault();
+      const input = document.getElementById('chatInput');
+      const question = input.value.trim();
+      const convId = document.getElementById('conversationId').value.trim();
+      const topK = parseInt(document.getElementById('topKSelect').value);
+      if (!question) return;
+
+      appendMessageUI('user', question, []);
+      input.value = '';
+
+      const sendBtn = document.getElementById('sendBtn');
+      sendBtn.disabled = true;
+
+      try {
+        const res = await fetch(`/chat/${convId}`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ question, top_k: topK })
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.detail || 'Chat request failed');
+
+        appendMessageUI(
+          'assistant',
+          data.answer,
+          data.citations,
+          data.insufficient_evidence,
+          data.retrieval_trace
+        );
+      } catch (err) {
+        appendMessageUI('assistant', `Error: ${err.message}`, [], true);
+      } finally {
+        sendBtn.disabled = false;
+      }
+    }
+
+    function appendMessageUI(role, content, citations = [], insufficientEvidence = false, retrievalTrace = []) {
+      const container = document.getElementById('chatMessages');
+      const isUser = role === 'user';
+
+      const wrap = document.createElement('div');
+      wrap.className = `flex ${isUser ? 'justify-end' : 'justify-start'}`;
+
+      let citationsHtml = '';
+      if (!isUser && citations && citations.length > 0) {
+        citationsHtml = `
+          <div class="mt-2.5 pt-2 border-t border-slate-800 text-[11px]">
+            <span class="font-semibold text-slate-400">Grounding Citations:</span>
+            <div class="flex flex-wrap gap-1.5 mt-1">
+              ${citations.map(c => `
+                <span class="inline-flex items-center px-2 py-0.5 rounded bg-indigo-500/10 text-indigo-300 border border-indigo-500/30 font-mono text-[10px]">
+                  📄 ${c.filename} (v${c.version}, p.${c.page_number})
+                </span>
+              `).join('')}
+            </div>
+          </div>
+        `;
+      }
+
+      let traceHtml = '';
+      if (!isUser && retrievalTrace && retrievalTrace.length > 0) {
+        traceHtml = `
+          <details class="mt-2 text-[11px] text-slate-400">
+            <summary class="cursor-pointer hover:text-slate-300 select-none">
+              Retrieval Trace (${retrievalTrace.length} candidate chunks)
+            </summary>
+            <div class="mt-1 space-y-1 pl-2 border-l border-slate-800">
+              ${retrievalTrace.map(t => `
+                <div class="flex items-center justify-between text-[10px] font-mono">
+                  <span class="truncate max-w-[240px] text-slate-400">${t.chunk_id}</span>
+                  <span class="text-indigo-400 font-bold">${t.similarity_score}</span>
+                </div>
+              `).join('')}
+            </div>
+          </details>
+        `;
+      }
+
+      let badgeHtml = '';
+      if (!isUser && insufficientEvidence) {
+        badgeHtml = `
+          <div class="mb-1.5">
+            <span class="inline-flex items-center gap-1 text-[10px] px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/40 font-semibold">
+              ⚠️ Insufficient Evidence Gate Triggered
+            </span>
+          </div>
+        `;
+      }
+
+      wrap.innerHTML = `
+        <div class="max-w-[85%] rounded-2xl px-4 py-3 text-xs ${
+          isUser
+            ? 'bg-indigo-600 text-white rounded-br-none shadow-md shadow-indigo-600/20'
+            : 'bg-slate-900 border border-slate-800 text-slate-200 rounded-bl-none shadow-sm'
+        }">
+          ${badgeHtml}
+          <div class="whitespace-pre-wrap leading-relaxed">${content}</div>
+          ${citationsHtml}
+          ${traceHtml}
+        </div>
+      `;
+
+      container.appendChild(wrap);
+      container.scrollTop = container.scrollHeight;
+    }
+
+    window.onload = init;
+  </script>
+</body>
+</html>
